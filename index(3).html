@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лаба: 3</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        //функция для создания массива пользователем
+function formMas() {
+    var n = Number(prompt("Введите количество элементов:"));
+    var nMas = [];
+    for (var i = 0; i < n; i++) {
+        nMas[i] = Number(prompt("Введите число:"));
+    }
+    return nMas;
+}
+
+//функция для поиска индекса максимального элемента
+function findMaxInd(mas) {
+    var max = 0;
+    for (var i = 1; i < mas.length; i++) {
+        if (mas[i] > mas[max]) {
+            max = i;
+        }
+    }
+    return max;
+}
+
+//функция для поиска индекса минимального элемента
+function findMinInd(mas) {
+    var min = 0;
+    for (var i = 1; i < mas.length; i++) {
+        if (mas[i] < mas[min]) {
+            min = i;
+        }
+    }
+    return min;
+}
+
+var massiv = formMas();
+
+//найти сумму отрицатеьлных элементов массива
+var sumOfOtric = 0;
+for (var i = 0; i < massiv.length; i++) {
+    if (massiv[i] < 0) {
+        sumOfOtric += massiv[i];
+    }
+}
+
+
+//найти произведение элементов массива, расположенных между максимальным и минимальм элементами
+var IndMax = findMaxInd(massiv);
+var IndMin = findMinInd(massiv);
+var proizv = 1;
+if (IndMin < IndMax) {
+    for (var k = IndMin + 1; k < IndMax; k++) {
+        proizv *= massiv[k];
+    }
+} else if (IndMax < IndMin) {
+    for (var k = IndMax + 1; k < IndMin; k++) {
+        proizv *= massiv[k];
+    }
+} else {
+    proizv = 0;
+}
+
+//упорядовачивание по возрастанию
+massiv.sort((a, b) => a - b);
+var str = massiv.join("; ");
+document.write("Количество отрицательных элементов массива равна " + sumOfOtric + "; Произведение элементов массива, расположенных между максимальным и минимальм элементами, равна " + proizv + "; Элементы по возрастанию: " + str);
+    </script>
+</head>
+<body>
+</body>
+</html>
